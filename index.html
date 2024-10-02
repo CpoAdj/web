@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tria-Guante GT</title>
+    <!-- Importa la fuente Fjalla One desde Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Fjalla One', sans-serif; /* Aplica la fuente Fjalla One a todo el texto */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background-image: url('f.jpg'); /* Añade la imagen de fondo */
+            background-size: cover; /* Hace que la imagen de fondo cubra toda la página */
+            background-position: center; /* Centra la imagen de fondo */
+            background-repeat: no-repeat; /* Evita que la imagen se repita */
+            color: white;
+            height: 180vh; /* Aumenta la altura del cuerpo para probar el scroll */
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: transparent;
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            position: fixed; /* Fija la barra lateral */
+            z-index: 2;
+            overflow-y: auto; /* Permite el desplazamiento dentro de la barra lateral */
+        }
+
+        .buttons-container {
+            margin-top: 20px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sidebar button {
+            width: 90%;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.5); 
+            border: 2px solid #00aeff;
+            color: #fff;
+            cursor: pointer;
+            text-align: center;
+            border-radius: 5px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            opacity: 0; /* Inicialmente oculto para el efecto de fade-in */
+        }
+
+        .sidebar button.animate-slide {
+            animation: slideInFromLeft 1s forwards;
+        }
+
+        .sidebar button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px #00aeff;
+        }
+
+        .content {
+            flex: 1;
+            padding: 20px;
+            margin-left: 250px; /* Desplaza el contenido a la derecha para evitar la superposición con la barra lateral */
+            position: relative;
+        }
+
+        .section {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: transparent; 
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #intro {
+            display: block;
+        }
+
+        .intro-title {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            opacity: 0; /* Inicialmente oculto */
+            animation: fadeIn 1s forwards; /* Animación de entrada */
+        }
+
+        .intro-image {
+            width: 45%;
+            max-width: 600px;
+            margin: 20px auto;
+            display: block;
+            transition: transform 0.3s, box-shadow 0.3s;
+            opacity: 0; /* Inicialmente oculto */
+            animation: fadeIn 1s forwards; /* Animación de entrada */
+            animation-delay: 0.5s; /* Retraso para que aparezca después del título */
+        }
+
+        .intro-image:hover {
+            transform: scale(1.05); /* Efecto de zoom al pasar el cursor */
+            box-shadow: 0 0 15px #00aeff; /* Efecto de brillo */
+        }
+
+        .intro-text {
+            font-family: 'Times New Roman', Times, serif; /* Aplica la fuente Times New Roman al texto informativo */
+            font-size: 20px;
+            line-height: 1.6;
+            text-align: center; /* Centrar el texto de introducción */
+            opacity: 0; /* Inicialmente oculto */
+            animation: fadeIn 1s forwards; /* Animación de entrada */
+            animation-delay: 1s; /* Retraso para que aparezca después de la imagen */
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+            color: #fff;
+            border: 2px solid #00aeff; /* Borde del mismo color que los botones */
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .close-btn:hover {
+            background-color: #00aeff; /* Cambia el color de fondo al pasar el cursor */
+            transform: scale(1.1);
+            box-shadow: 0 0 10px #00aeff;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Estilos de la barra de desplazamiento */
+        /* Para navegadores basados en Webkit (Chrome, Safari) */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #1f3376;
+            border-radius: 5px;
+            border: 3px solid #1f3376;
+        }
+
+        /* Para Firefox */
+        scrollbar-color: #1f3376 #1f3376;
+        scrollbar-width: thin;
+
+        /* Animaciones */
+        @keyframes slideInFromTop {
+            0% { transform: translateY(-100%); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes slideInFromBottom {
+            0% { transform: translateY(100%); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes slideInFromLeft {
+            0% { transform: translateX(-100%); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="buttons-container">
+            <button class="animate-slide" onclick="openSection('section1', 'Modelo.html')">Modelo</button>
+            <button class="animate-slide" onclick="openSection('section2', 'Sensores.html')">Sensores</button>
+            <button class="animate-slide" onclick="openSection('section3', 'https://hf.co/chat/assistant/66ccd4218723b274e5892cf9')">IA</button>
+            <button class="animate-slide" onclick="openSection('section4', 'bd.html')">Base de Datos</button>
+            <button class="animate-slide" onclick="openSection('section5', 'Integrantes.html')">Equipo GT</button>
+            <button class="animate-slide" onclick="openSection('section6', 'informacion.html')">Información</button>
+        </div>
+    </div>
+    <div class="content">
+        <!-- Introducción -->
+        <div id="intro" class="section">
+            <h1 class="intro-title">Tria-Guante GT</h1>
+            <img src="GuanteT.png" alt="Imagen del Proyecto" class="intro-image">
+            <p class="intro-text">
+                <strong>Bienvenido a la página del proyecto Tría-Guante GT.</strong>  
+                <br><br>
+                Nos complace presentar nuestro prototipo y darle a conocer todas las características y funcionalidades que ofrece. A través de los botones de navegación, podrá explorar diferentes secciones de nuestra página:
+                <br><br>
+                <strong>Modelo Virtual:</strong> Conozca el diseño y funcionamiento de nuestro modelo digital.
+                <br>
+                <strong>Sensores Utilizados:</strong> Descubra los sensores que implementamos en nuestro proyecto.
+                <br>
+                <strong>Inteligencia Artificial (IA):</strong> Nuestra IA está dedicada a mejorar la funcionalidad del prototipo y aprender sobre los datos recogidos.
+                <br>
+                <strong>Base de Datos:</strong> Toda la información recolectada y gestionada en un solo lugar.
+                <br>
+                <strong>Equipo GT:</strong> Conozca a los integrantes que hicieron posible este proyecto.
+                <br>
+                <strong>Información:</strong> Datos adicionales y documentación de interés.
+            </p>
+        </div>
+
+        <!-- Secciones dinámicas -->
+        <div id="section1" class="section">
+            <button class="close-btn" onclick="closeSection()">Cerrar</button>
+            <iframe src=""></iframe>
+        </div>
+        <div id="section2" class="section">
+            <button class="close-btn" onclick="closeSection()">Cerrar</button>
+            <iframe src=""></iframe>
+        </div>
+        <div id="section3" class="section">
+            <button class="close-btn" onclick="closeSection()">Cerrar</button>
+            <iframe src=""></iframe>
+        </div>
+        <div id="section4" class="section">
+            <button class="close-btn" onclick="closeSection()">Cerrar</button>
+            <iframe src=""></iframe>
+        </div>
+        <div id="section5" class="section">
+            <button class="close-btn" onclick="closeSection()">Cerrar</button>
+            <iframe src=""></iframe>
+        </div>
+        <div id="section6" class="section">
+            <button class="close-btn" onclick="closeSection()">Cerrar</button>
+            <iframe src=""></iframe>
+        </div>
+    </div>
+
+    <script>
+        function openSection(sectionId, url) {
+            document.querySelectorAll('.section').forEach(function (section) {
+                section.style.display = 'none';
+            });
+
+            var section = document.getElementById(sectionId);
+            section.style.display = 'block';
+            section.querySelector('iframe').src = url;
+        }
+
+        function closeSection() {
+            document.querySelectorAll('.section').forEach(function (section) {
+                section.style.display = 'none';
+            });
+
+            document.getElementById('intro').style.display = 'block';
+        }
+
+        // Desencadena las animaciones después de que el contenido de la página haya cargado
+        window.onload = function() {
+            var buttons = document.querySelectorAll('.sidebar button');
+            buttons.forEach(function(button, index) {
+                setTimeout(function() {
+                    button.classList.add('animate-slide');
+                }, index * 200); // Añade un retardo de 200ms entre cada animación de los botones
+            });
+        };
+    </script>
+</body>
+</html>
+	

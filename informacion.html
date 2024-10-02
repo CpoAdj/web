@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información del Proyecto</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            background-color: transparent;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: transparent;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            font-family: 'Fjalla One', sans-serif;
+            color: white;
+            opacity: 0;
+            animation: slideIn 1s ease forwards;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 36px;
+        }
+
+        h2 {
+            margin-top: 30px;
+            color: white;
+            font-size: 24px;
+        }
+
+        p, ul {
+            color: white;
+            font-family: 'Times New Roman', serif;
+            opacity: 0;
+            animation: slideIn 1s ease forwards;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: disc;
+            padding-left: 40px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+            color: white;
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Información del Proyecto</h1>
+
+        <h2>Descripción del Proyecto</h2>
+        <p>Este proyecto, llamado <strong>Tria-Guante GT</strong>, se centra en la creación de un guante inteligente capaz de medir y monitorear signos vitales como la temperatura corporal y la frecuencia cardíaca. El objetivo es utilizar esta herramienta en situaciones de emergencia para realizar un triaje rápido y efectivo.</p>
+
+        <h2>Objetivos</h2>
+        <ul>
+            <li>Desarrollar un dispositivo portátil y fácil de usar para medir signos vitales.</li>
+            <li>Implementar tecnología de sensores avanzados para obtener datos precisos.</li>
+            <li>Facilitar el proceso de triaje en emergencias médicas.</li>
+        </ul>
+
+        <h2>Metodología</h2>
+        <p>El desarrollo del proyecto siguió una metodología ágil, permitiendo una rápida interación y mejora continua. Se realizaron pruebas exhaustivas para asegurar la precisión de los datos y la usabilidad del dispositivo.</p>
+
+        <div class="footer">
+            <p>© 2024 Tria-Guante GT. Todos los derechos reservados.</p>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const elements = document.querySelectorAll('h1, h2, p, ul');
+            elements.forEach((element, index) => {
+                element.style.animationDelay = `${index * 0.3}s`;
+            });
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sensores del Proyecto - Proyecto Final</title>
+    <!-- Importa la fuente Fjalla One desde Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
+    <style>
+        /* Estilo del cuerpo principal */
+        body {
+            font-family: 'Fjalla One', sans-serif; /* Aplica la fuente Fjalla One a todo el texto */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background-image: url('f.jpg'); /* Añade la imagen de fondo */
+            background-size: cover; /* Hace que la imagen de fondo cubra toda la página */
+            background-position: center; /* Centra la imagen de fondo */
+            background-repeat: no-repeat; /* Evita que la imagen se repita */
+            color: white;
+            overflow: hidden; /* Evita la aparición de una barra de desplazamiento extra */
+        }
+
+        /* Barra lateral fija */
+        .sidebar {
+            width: 250px;
+            background-color: transparent;
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            position: fixed;
+            z-index: 2;
+            overflow-y: auto; /* Permite el desplazamiento dentro de la barra lateral */
+        }
+
+        /* Contenido principal */
+        .content {
+            flex: 1;
+            padding: 20px;
+            margin-left: 250px; /* Desplaza el contenido a la derecha para evitar la superposición con la barra lateral */
+            color: white;
+            position: relative;
+            background-color: transparent;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-top: 20px;
+            height: auto; /* Ajusta la altura al contenido */
+            overflow-y: auto; /* Permite el desplazamiento solo dentro del contenido si es necesario */
+            animation: fadeIn 1s forwards;
+        }
+
+        .content h1 {
+            text-align: center;
+            font-size: 30px;
+            margin-bottom: 20px;
+            animation: slideInFromTop 1s forwards;
+        }
+
+        .content p {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 20px;
+            line-height: 1.6;
+            text-align: center;
+            margin-bottom: 20px;
+            animation: fadeIn 1s forwards;
+        }
+
+      .sensor-row {
+    display: flex;
+    align-items: flex-start; 
+    justify-content: flex-start;
+    margin-bottom: 15px; /* Reduce el espacio entre los recuadros */
+    background-color: rgba(23, 23, 23, 0.9); 
+    border: 2px solid #00aeff; 
+    border-radius: 10px;
+    padding: 8px; /* Reduce el padding dentro de los recuadros */
+    max-width: 80%; /* Reduce el ancho máximo del recuadro */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .sensor-row:nth-child(even) {
+            flex-direction: row-reverse; /* Alterna la dirección para los elementos pares */
+        }
+
+        .sensor-image {
+            width: 100px;
+            margin-right: 15px; /* Espacio entre la imagen y el texto */
+            border-radius: 5px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .sensor-row:nth-child(even) .sensor-image {
+            margin-right: 0;
+            margin-left: 20px; /* Ajusta el margen para los elementos pares */
+        }
+
+        .sensor-image:hover {
+            transform: scale(1.1); /* Efecto de zoom al pasar el cursor */
+            box-shadow: 0 0 15px #00aeff; /* Efecto de brillo */
+        }
+
+        .info-text {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px; /* Reduce el tamaño de la fuente */
+    text-align: left;
+    max-width: 550px; /* Limita el ancho del texto */
+    margin-top: 0;
+        }
+
+        /* Animaciones */
+        @keyframes slideInFromTop {
+            0% { transform: translateY(-100%); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Personalización del scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px; /* Ancho del scrollbar */
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #1f3376; /* Color del scrollbar */
+            border-radius: 5px;
+            border: 2px solid #05a0d5; /* Borde alrededor del scrollbar */
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: rgba(0, 0, 0, 0); /* Fondo transparente para el track del scrollbar */
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <!-- Este div ahora solo contiene la barra lateral y ya no necesita cambiar -->
+    </div>
+
+    <div class="content">
+        <h1>Un Poco Sobre Los Sensores</h1>
+        <p>
+            Aquí encontrarás los sensores utilizados, cada uno integrado a la infraestructura del guante. <br>
+            El conjunto de estos sensores sirve para la medición de variables biológicas emitidas por el cuerpo, como el pulso, la temperatura y el nivel de oxígeno en la sangre.
+        </p>
+        <p>
+            <strong>ESP32:</strong> Este microcontrolador facilita el proceso de recepción de datos y los envía a una computadora para visualización. <br>
+            <strong>MLX90614:</strong> Utilizado para medir la temperatura corpora, se encuentra en el dedo indice. <br>
+             <strong>MAX30102:</strong> Utilizado para medir el ritmo cardíaco de la persona. Se encuentra colocado en el dedo medio.
+        </p>
+        
+        <!-- Contenedor de sensores organizado en filas -->
+        <div class="sensor-row">
+            <img src="ESP.png" alt="ESP32s" class="sensor-image">
+            <div class="info-text">ESP32s: Microcontrolador de bajo consumo, con WiFi y Bluetooth integrado.</div>
+        </div>
+        
+        <div class="sensor-row">
+            <img src="MLX.png" alt="MLX90614" class="sensor-image">
+            <div class="info-text">MLX90614: Sensor de temperatura infrarrojo.</div>
+        </div>
+        
+        <div class="sensor-row">
+            <img src="MAX2.png" alt="MAX30102" class="sensor-image">
+            <div class="info-text">MAX30102: Sensor para detección de oxigeno en la sangre y ritmo cardiaco.</div>
+        </div>
+    </div>
+</body>
+</html>
